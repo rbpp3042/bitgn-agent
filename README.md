@@ -2,7 +2,7 @@
 
 An autonomous agent for the [BitGN PAC1 benchmark](https://bitgn.ai/competitions/pac1) using Claude Code as the executor.
 
-**Official Result: 82/104 (78.8%)** on Claude Sonnet 3.5
+**Official Result: 82/104 (78.8%)** on Claude Sonnet 4.6
 
 ## Quick Start
 
