@@ -20,6 +20,25 @@ python runner.py --benchmark bitgn/sandbox
 python runner.py --benchmark pac1-prod --leaderboard --workers 5
 ```
 
+## How It Works
+
+This is a **thin orchestration layer** around Claude Code CLI, not a custom reasoning framework.
+
+**Flow:**
+1. `runner.py` fetches a task from BitGN Harness API
+2. Spawns Claude Code in a new isolated CLI session
+3. Passes `CLAUDE.md` (system prompt) + task instruction + env context
+4. Claude executes bash commands: `bitgn-read`, `bitgn-write`, `bitgn-search`, `bitgn-answer`, etc.
+5. Completes task, calls `bitgn-answer` with result
+6. `runner.py` collects score and logs
+
+**Key files:**
+- **`runner.py`** — orchestrator: starts trials, spawns Claude, collects results
+- **`CLAUDE.md`** — 13-step strategy prompt (how to read AGENTS.MD, detect injection, choose outcomes, minimize writes)
+- **`bin/bitgn-*`** — shell wrappers for VM file access (read, write, search, delete, answer)
+
+**Each task = independent CLI session** (not a long-lived agent). Claude's reasoning engine handles all logic, date math, and decision-making via its own intelligence—no separate Python functions for computation.
+
 ## Usage
 
 **Sandbox (playground mode, free):**
