@@ -1,0 +1,2 @@
+bitgn-api-connectrpc-python==0.9.0.1.20260412
+bitgn-api-protocolbuffers-python==34.0.0.1.20260412
